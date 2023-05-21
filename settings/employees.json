@@ -1,0 +1,46 @@
+{
+  "start": {
+    "source": {
+      "uri": "jdbc:mysql://localhost:3306/employees?useSSL=false&allowPublicKeyRetrieval=true&useSSL=false",
+      "user": "root",
+      "password": "root"
+    },
+    "target": {
+      "mode": "insert",
+      "uri": "mongodb://localhost:27017/",
+      "namespace": "employees.departments"
+    },
+    "template": {
+      "_id": "$dept_no",
+      "name": "$dept_name",
+      "managers": ["@deptmanagers"]
+    },
+    "query": {
+      "sql": "SELECT * FROM departments"
+    }
+  },
+
+  "deptmanagers": {
+    "template": {
+      "_id": "$emp_no",
+      "name": "@employee",
+      "from_date": "$from_date",
+      "to_date": "$to_date"
+    },
+    "query": {
+      "sql": "SELECT * FROM dept_manager where dept_no = ?"
+    },
+    "params": ["dept_no"]
+  },
+
+  "employee": {
+    "template": {
+      "first_name": "$first_name",
+      "last_name": "$last_name"
+    },
+    "query": {
+      "sql": "SELECT * from employees where emp_no = ?"
+    },
+    "params": ["emp_no"]
+  }
+}

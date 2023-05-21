@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  mongo-syphon: # mongosyphon 서버
+    image: mongo-syphon-image:latest
+    container_name: mongo-syphon-container
+    volumes:
+      - ./settings:/engineer/settings
+    ports:
+      - 3306:3306 # soruce: RDBMS
+      - 26379:26379 # sink: MongoDB
+      - 30000:30000
+    stdin_open: true
+    tty: true
