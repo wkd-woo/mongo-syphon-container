@@ -70,7 +70,7 @@ origin: [MongoSyphon](https://github.com/johnlpage/MongoSyphon)
 ```
 
 ```
-docker exec -it mongo-syphon-container java -jar /dbp/MongoSyphon/bin/MongoSyphon.jar -c /dbp/settings/test.json
+docker exec -it mongo-syphon-container java -jar /engineer/MongoSyphon/bin/MongoSyphon.jar -c /engineer/settings/test.json
 ```
 
 ```
